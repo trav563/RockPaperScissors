@@ -29,6 +29,21 @@ function playRound(playerSelection, computerSelection){
         }
 }
 
+function getPlayerChoice(){
+    let validInput = false;
+    while(validInput == false){
+    const choice = prompt("Rock, Paper or Scissors?")
+        if(choice == null){
+            continue;
+        }
+    const lowerCaseChoice = choice.toLowerCase();
+        if(options.includes(lowerCaseChoice)){
+            validInput = true;
+            return lowerCaseChoice;
+        }
+}
+}
+
 function game(){
 let scorePlayer = 0;
 let scoreComputer = 0;
