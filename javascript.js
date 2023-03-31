@@ -3,6 +3,10 @@ const outcome = document.querySelector('.outcome')
 const rockButton = document.querySelector('.rock')
 const paperButton = document.querySelector('.paper')
 const scissorsButton = document.querySelector('.scissors')
+let scorePlayer = 0
+let scoreComputer = 0
+const playerScoreSpan = document.querySelector('.playerScore');
+const computerScoreSpan = document.querySelector('.computerScore');
 
 
 
@@ -26,6 +30,9 @@ function decideWinner(playerSelection, computerSelection){
 
 function playRound(playerSelection, computerSelection){
     const result = decideWinner(playerSelection, computerSelection);
+        
+        outcome.innerText = '';
+
         if(result == "tie"){
             const p = document.createElement('p');
             p.innerText = "It is a tie."
@@ -34,33 +41,77 @@ function playRound(playerSelection, computerSelection){
             const p = document.createElement('p');
             p.innerText = `You win! ${playerSelection} beats ${computerSelection}!`
             outcome.appendChild(p);
+            scorePlayer++
         } else {
             const p = document.createElement('p');
             p.innerText = `You lose. ${computerSelection} beats ${playerSelection}`
             outcome.appendChild(p);
+            scoreComputer++
         } 
+
+        if(scorePlayer === 6 || scoreComputer === 6){
+            scorePlayer = 0;
+            scoreComputer = 0;
+        }
 } 
+
+function checkForWinner(scorePlayer, scoreComputer){
+
+    if(scorePlayer === 5){
+        const h2 = document.createElement('h2')
+        h2.classList.add(`playerWon`);
+        h2.innerText = `You won ${scorePlayer} to ${scoreComputer}! Nice!`
+        outcome.appendChild(h2);
+        scoreComputer = 0;
+        scorePlayer = 0;
+
+        playerScoreSpan.innerText = `You: ${scorePlayer}`
+        computerScoreSpan.innerText = `Computer: ${scoreComputer}`
+    }
+
+    if(scoreComputer === 5){
+        const h2 = document.createElement('h2')
+        h2.classList.add(`computerWon`);
+        h2.innerText = `You lost ${scorePlayer} to ${scoreComputer}! Better luck next time!`
+        outcome.appendChild(h2);
+        
+        scoreComputer = 0;
+        scorePlayer = 0;
+
+        playerScoreSpan.innerText = `You: ${scorePlayer}`
+        computerScoreSpan.innerText = `Computer: ${scoreComputer}`
+    }
+}
 
 rockButton.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
     const playerSelection = 'rock';
     playRound(playerSelection, computerSelection);
+    playerScoreSpan.innerText = `You: ${scorePlayer}`
+    computerScoreSpan.innerText = `Computer: ${scoreComputer}`
+    checkForWinner(scorePlayer, scoreComputer);
 }) 
 
 paperButton.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
     const playerSelection = 'paper';
     playRound(playerSelection, computerSelection);
+    playerScoreSpan.innerText = `You: ${scorePlayer}`
+    computerScoreSpan.innerText = `Computer: ${scoreComputer}`
+    checkForWinner(scorePlayer, scoreComputer);
 })
 
 scissorsButton.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
     const playerSelection = 'scissor';
     playRound(playerSelection, computerSelection);
+    playerScoreSpan.innerText = `You: ${scorePlayer}`
+    computerScoreSpan.innerText = `Computer: ${scoreComputer}`
+    checkForWinner(scorePlayer, scoreComputer);
 })
 
 
-const result = document.createElement('div');
+
 
 
 
@@ -104,6 +155,6 @@ for (let i = 0; i < 5; i++) {
 }   else {
     console.log("We have a tie")
 }
-}
+} 
 
-game() */
+game()  */
