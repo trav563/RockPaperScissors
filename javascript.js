@@ -1,4 +1,10 @@
 const options = ["rock", "paper", "scissors"];
+const outcome = document.querySelector('.outcome')
+const rockButton = document.querySelector('.rock')
+const paperButton = document.querySelector('.paper')
+const scissorsButton = document.querySelector('.scissors')
+
+
 
 function getComputerChoice(){
     const choice = options[Math.floor(Math.random() * options.length)]
@@ -21,14 +27,47 @@ function decideWinner(playerSelection, computerSelection){
 function playRound(playerSelection, computerSelection){
     const result = decideWinner(playerSelection, computerSelection);
         if(result == "tie"){
-            return "It is a tie."
+            const p = document.createElement('p');
+            p.innerText = "It is a tie."
+            outcome.appendChild(p);
         } else if(result == "player"){
-            return `You win! ${playerSelection} beats ${computerSelection}!`
+            const p = document.createElement('p');
+            p.innerText = `You win! ${playerSelection} beats ${computerSelection}!`
+            outcome.appendChild(p);
         } else {
-            return `You lose. ${computerSelection} beats ${playerSelection}`
-        }
-}
+            const p = document.createElement('p');
+            p.innerText = `You lose. ${computerSelection} beats ${playerSelection}`
+            outcome.appendChild(p);
+        } 
+} 
 
+rockButton.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    const playerSelection = 'rock';
+    playRound(playerSelection, computerSelection);
+}) 
+
+paperButton.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    const playerSelection = 'paper';
+    playRound(playerSelection, computerSelection);
+})
+
+scissorsButton.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    const playerSelection = 'scissor';
+    playRound(playerSelection, computerSelection);
+})
+
+
+const result = document.createElement('div');
+
+
+
+
+
+
+/* 
 function getPlayerChoice(){
     let validInput = false;
     while(validInput == false){
@@ -42,9 +81,9 @@ function getPlayerChoice(){
             return lowerCaseChoice;
         }
 }
-}
+} */
 
-function game(){
+/* function game(){
 let scorePlayer = 0;
 let scoreComputer = 0;
 console.log("Let's Begin");
@@ -67,4 +106,4 @@ for (let i = 0; i < 5; i++) {
 }
 }
 
-game()
+game() */
